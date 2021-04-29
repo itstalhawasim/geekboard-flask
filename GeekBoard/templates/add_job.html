@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="row row-grid align-items-center">
+      <div class="col-md-12 order-md-2">
+        <div class="pr-md-5">
+          <div class="card-body">
+            <h3 class="mb-1"><i class="fa fa-briefcase"></i> Add a Job Post</h3>
+            {% from 'includes/_formhelpers.html' import render_field %}
+            <form role="form" class="mt-4" method="POST">
+              {% include 'includes/_messages.html' %}
+              <div class="form-group">
+                <label for="exampleInputEmail1">Job Title</label>
+                {{ render_field(form.title, class_="form-control", placeholder="Job Title") }}
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Company</label>
+                {{ render_field(form.company, class_="form-control", placeholder="Company Name") }}
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Location</label>
+                {{ render_field(form.location, class_="form-control", placeholder="Job Location") }}
+              </div>
+              <div class="form-group mb-4">
+                <label for="exampleInputEmail1">Job Description</label>
+                <textarea class="form-control" name="details" rows="10" id="details"><h4>About Job</h4><p>This is a dummy text, you can replace this with the actual job description. Vestibulum mauris odio, eleifend eget felis egestas, aliquet cursus sapien. Sed eu sapien ut leo vestibulum ultrices nec efficitur erat. Suspendisse dapibus at dolor eu rutrum. Phasellus vitae fringilla ligula. Etiam ultrices quam est, eu interdum massa accumsan sed.</li></ul></textarea>
+              </div>
+              <div class="form-group mb-4">
+                <label for="exampleInputEmail1">Coding Task</label>
+                <textarea class="form-control" name="coding_task" rows="10" id="coding_task"><h4>Coding Task</h4><p>This is a dummy text, you can replace this with the actual coding task. Vestibulum mauris odio, eleifend eget felis egestas, aliquet cursus sapien. Sed eu sapien ut leo vestibulum ultrices nec efficitur erat. Suspendisse dapibus at dolor eu rutrum. Phasellus vitae fringilla ligula. Etiam ultrices quam est, eu interdum massa accumsan sed.</p><p><strong>Example</strong></p><p><strong>Input:</strong></p><p>ABCD</p><p><strong>Output:</strong></p><p>DCBA</p><p><strong>Note: You can use any programming language, it is recommended to comment your code and indent it properly before submitting it.</strong></p></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

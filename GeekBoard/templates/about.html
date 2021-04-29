@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="section section-lg">
+  <div class="container">
+    <div class="row row-grid align-items-center">
+      <div class="col-md-6 order-md-1">
+        <img src="{{url_for('static', filename='assets/img/about.svg') }}" class="img-fluid">
+      </div>
+      <div class="col-md-6 order-md-2">
+        <div class="pr-md-5">
+          <h3>About us</h3>
+          <p>Geekboard is a job board for software developers, we bring coding tasks first in the hiring process allowing candidates and recruiters save time.</p>
+          <p class="mb-2">It is made using these amazing open source projects,</p>
+          <a href="http://flask.pocoo.org/" class="badge badge-pill badge-primary text-uppercase">Python - Flask</a>
+          <a href="https://getbootstrap.com" class="badge badge-pill badge-primary text-uppercase">Bootstrap 4 - Argon</a>
+          <a href="https://undraw.co/" class="badge badge-pill badge-primary text-uppercase">Undraw</a>
+          <a href="https://github.com/admiralobvious/flask-mysqldb" class="badge badge-pill badge-primary text-uppercase">MySQL</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="row row-grid align-items-center">
+        <div class="col-md-12 order-md-2">
+          <div class="pr-md-5">
+            <div class="card-body">
+              {% if application %}
+                <h3 class="mb-4"><i class="fa fa-id-card"></i> {{application.full_name|capitalize}}'s application for {{job_title}}</h3>
+              {% else %}
+                <h3 class="mt-4 mb-4 text-center">Application not found.</h3>
+              {% endif %}
+              {% include 'includes/_messages.html' %}
+              {% if application %}
+                <div class="nav-wrapper">
+                  <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-text" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link mb-sm-3 mb-md-0 active show" id="tabs-text-1-tab" data-toggle="tab" href="#tabs-text-1" role="tab" aria-controls="tabs-text-1" aria-selected="true"><i class="fa fa-user mr-1"></i>Candidate Details</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-sm-3 mb-md-0" id="tabs-text-2-tab" data-toggle="tab" href="#tabs-text-2" role="tab" aria-controls="tabs-text-2" aria-selected="false"><i class="fa fa-graduation-cap mr-1"></i>Cover Letter</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-sm-3 mb-md-0" id="tabs-text-3-tab" data-toggle="tab" href="#tabs-text-3" role="tab" aria-controls="tabs-text-3" aria-selected="false"><i class="fa fa-code mr-1"></i>Coding Task Solution</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card shadow">
+                  <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade active show" id="tabs-text-1" role="tabpanel" aria-labelledby="tabs-text-1-tab">
+                        <dl class="row mt-2 mb-2">
+                          <dt class="col-sm-3">Candidate Name:</dt>
+                          <dd class="col-sm-9">{{application.full_name|capitalize}}</dd>
+                          <dt class="col-sm-3">Applied for Job:</dt>
+                          <dd class="col-sm-9"><a href="jobs/{{application.job_id}}">{{job_title}}</a></dd>
+                          <dt class="col-sm-3">Applied on:</dt>
+                          <dd class="col-sm-9">{{application.applied_on.strftime('%B %d, %Y, %I:%M %p')}}</dd>
+                          <dt class="col-sm-3">Candidate Email:</dt>
+                          <dd class="col-sm-9"><a href="mailto:{{application.email}}">{{application.email}}</a></dd>
+                          <dt class="col-sm-3">Candidate Phone:</dt>
+                          <dd class="col-sm-9">{{application.phone}}</dd>
+                        </dl>
+                      </div>
+                      <div class="tab-pane fade" id="tabs-text-2" role="tabpanel" aria-labelledby="tabs-text-2-tab">
+                        <label for="exampleInputEmail1">Candidate's Cover Letter</label>
+                        <textarea class="form-control" rows="10" readonly>{{ application.cover_letter | safe }}</textarea>
+                      </div>
+                      <div class="tab-pane fade" id="tabs-text-3" role="tabpanel" aria-labelledby="tabs-text-3-tab">
+                        <label for="exampleInputEmail1">Candidate's Coding Task Solution</label>
+                        <textarea class="form-control" rows="30" readonly>{{ application.coding_task_solution | safe }}</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div><br>
+                <div class="card shadow">
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                      {% from 'includes/_formhelpers.html' import render_field %}
+                      <form role="form" method="POST" action="">
+                        {% include 'includes/_messages.html' %}
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Change Application Status</label>
+                           {{ render_field(form.application_status, class_="custom-select form-control") }}
+                        </div>
+                        <div class="form-group ">
+                          <label for="exampleInputEmail1">Message to the Candidate</label>
+                          {{ render_field(form.message, class_="form-control", placeholder="Message to the candidate...", rows="5") }}
+                        </div>
+                        <div>
+                          <button type="submit" class="btn pull-right btn-primary">Submit & Notify</button>
+                        </div>
+                        <input type="hidden" name="id" value="{{application.id}}">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

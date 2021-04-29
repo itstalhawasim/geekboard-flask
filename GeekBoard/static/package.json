@@ -1,0 +1,26 @@
+{
+  "name": "geekboard",
+  "version": "1.0.0",
+  "description": "GeekBoard - Flask based Job Board!",
+  "main": "app.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flask",
+    "python",
+    "bootstrap",
+    "css",
+    "html",
+    "js"
+  ],
+  "author": "Talha Wasim",
+  "license": "MIT",
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^4.6.0",
+    "codemirror": "^5.61.0",
+    "jquery": "^3.6.0"
+  }
+}

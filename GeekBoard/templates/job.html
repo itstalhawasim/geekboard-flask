@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block content %}
+  <section class="section-profile-cover bg-default section-shaped my-0">
+    <!-- SVG separator -->
+    <div class="separator separator-bottom separator-skew">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+    </svg>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="card card-profile shadow mt--300">
+      <div class="px-4">
+        <div class="text-center mt-5">
+          {% if job %}
+            <h3>{{ job.title }}<span class="font-weight-light">, {{ job.company }}</span>
+            </h3>
+            {{ job.location }}
+            <div class="h6 mt-3"> Posted on {{ job.posted_on.strftime('%B %d, %Y, %I:%M %p') }}</div>
+            <a class="btn btn-primary mt-4" href="#application_form">Apply Now</a>
+          </div>
+          <div class="mt-5 py-5 border-top">
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                {{ job.details | safe }}
+              </div>
+            </div>
+          </div>
+          <div class="mt-1 py-5 border-top">
+            <div class="row justify-content-center">
+              <div class="col-lg-10">
+                {{ job.coding_task | safe }}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <h3 class="mt-5 pt-3">Job not found.
+          </h3>
+          <a class="btn btn-primary mt-5 mb-5 " href="/"><i class="fa fa-arrow-left mr-1"></i> back to home</a>
+        {% endif %}
+      </div>
+    </div>
+    {% if job %}
+      <div class="card shadow mt-5" id="application_form">
+        <div class="container">
+          <div class="px-4">
+            <div class="mt-5">
+              <h4>Application for {{job.title}} at {{job.company}}</h4>
+              {% from 'includes/_formhelpers.html' import render_field %}
+            </div>
+            <div class="mt-3 py-4 border-top">
+              <div class="row">
+                <div class="col-lg-12">
+                  <form role="form" method="POST" action="">
+                    {% include 'includes/_messages.html' %}
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Full Name</label>
+                      {{ render_field(form.full_name, class_="form-control", placeholder="Your Full Name", required="") }}
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email Address</label>
+                      {{ render_field(form.email, class_="form-control", placeholder="Your Email", required="") }}
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Phone Number</label>
+                      {{ render_field(form.phone, class_="form-control", placeholder="Your Phone Number", required="") }}
+                    </div>
+                    <div class="form-group mb-4">
+                      <label for="exampleInputEmail1">Cover Letter</label>
+                      {{ render_field(form.cover_letter, class_="form-control", placeholder="Why should we hire you?", rows="5", required="") }}
+                    </div>
+                    <div class="form-group mb-4">
+                      <label for="exampleInputEmail1">Coding Task Solution</label>
+                      {{ render_field(form.coding_task_solution, class_="form-control", placeholder="Solution of the coding task in any programming language.", rows="30", required="") }}
+                    </div>
+                    <input type="hidden" name="job_id" id="job_id" value="{{job.id}}">
+                    <div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

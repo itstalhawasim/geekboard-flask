@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+  <section class="section bg-secondary">
+    <div class="container">
+      <div class="row row-grid align-items-center">
+        <div class="col-md-6 order-md-1">
+          <img src="{{url_for('static',filename='assets/img/contact.svg') }}" class="img-fluid">
+        </div>
+        <div class="col-md-6 order-md-2">
+          <div class="pr-md-5">
+            <div class="card-body">
+              <h3 class="mb-1">Contact us</h3>
+              <p class="mt-0">Need help? We're here for you!</p>
+              <form role="form" method="POST" action="">
+                <div class="form-group mt-4">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                    </div>
+                    <input class="form-control" name="name" id="name" placeholder="Your name" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" name="email" id="email" placeholder="Email address" type="email">
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <textarea class="form-control form-control-alternative" name="query" id="query" rows="4" cols="80" placeholder="Type a message..."></textarea>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-default btn-round btn-block btn-lg">Send</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="row row-grid align-items-center">
+        <div class="col-md-12 order-md-2">
+          <div class="pr-md-5">
+            <div class="card-body">
+              <h3 class="mb-4"><i class="fa fa-users"></i> Manage Candidate Applications</span></h3>
+              {% include 'includes/_messages.html' %}
+              <table class="table table-bordered table-hover" style="width: 100%" name="manage_applications" id="manage_applications">
+                <thead>
+                  <tr>
+                    <th>Job</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for application in applications %}
+                    <tr>
+                      <td><a href="/jobs/{{application.job_id}}">{{ application.title }}</a></td>
+                      <td>{{ application.applied_on.strftime('%d-%m-%Y') }}</td>
+                      <td>{{ application.full_name }}</td>
+                      <td><a href="mailto:{{application.email}}">{{ application.email }}</a></td>
+                      <td>{{ application.phone }}</td>
+                      {% if application.status == "Applied" %}
+                        {% set typ = 'info' %}
+                      {% elif application.status == "Screening" %}
+                        {% set typ = 'primary' %}
+                      {% elif application.status == "Interview" %}
+                        {% set typ = 'warning' %}
+                      {% elif application.status == "Hired" %}
+                        {% set typ = 'success' %}
+                      {% elif application.status == "Rejected" %}
+                        {% set typ = 'danger' %}
+                      {% else %}
+                        {% set typ = 'info' %}
+                      {% endif %}
+                      <td><center><span class="badge badge-pill badge-{{typ}} text-uppercase">{{application.status}}</span></center></td>
+                      <td><center><div><a href="applications/{{ application.id }}" class="btn btn-sm btn-primary mb-1 mr-1">View</a><form action="{{url_for('delete_application',id=application.id)}}" method="POST" style="display: inline;">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="submit" class="btn btn-sm btn-danger mb-1" value="DELETE">
+                    </form>
+                  </div></center></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock content %}

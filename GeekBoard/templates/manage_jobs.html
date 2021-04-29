@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="row row-grid align-items-center">
+        <div class="col-md-12 order-md-2">
+          <div class="pr-md-5">
+            <div class="card-body">
+              <h3 class="mb-4"><i class="fa fa-wrench"></i> Manage your Job Posts</h3>
+              {% include 'includes/_messages.html' %}
+              <table class="table is_datatable table-bordered table-hover" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Posted On</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for job in jobs %}
+                    <tr>
+                      <td><a href="/jobs/{{job.id}}">{{ job.title }}</a></td>
+                      <td>{{ job.company }}</td>
+                      <td>{{ job.posted_on.strftime('%B %d, %Y, %I:%M %p') }}</td>
+                      <td><center><div><a href="edit_job/{{ job.id }}" class="btn btn-sm btn-warning mb-1 mr-1">Edit</a><form action="{{url_for('delete_job',id=job.id)}}" method="POST" style="display: inline;">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="submit" class="btn btn-sm btn-danger mb-1" value="DELETE">
+                    </form>
+                  </div></center></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock content %}
